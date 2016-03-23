@@ -1,4 +1,4 @@
-# &lt;https://github.com/sravan-s/carousel&gt;
+# carousel
 
 > A custom carousel in the style of webcomponents.
 
