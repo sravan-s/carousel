@@ -1,0 +1,11 @@
+<script>
+(function() {
+    // Creates an object based in the HTML Element prototype
+    var element = Object.create(HTMLElement.prototype);
+
+    // Registers custom element
+    document.registerElement('custom-carousel', {
+        prototype: element
+    });
+}());
+</script>
