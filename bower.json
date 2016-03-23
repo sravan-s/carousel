@@ -1,0 +1,17 @@
+{
+    "name": "https://github.com/sravan-s/carousel",
+    "version": "0.0.0",
+    "description": "A custom carousel in the style of webcompo",
+    "license": "MIT",
+    "main": "custom-carousel.html",
+    "keywords": [
+        "web-components"
+    ],
+    "ignore": [
+        "**/.*",
+        "bower_components"
+    ],
+    "dependencies": {
+        "webcomponentsjs": "^0.7.0"
+    }
+}
