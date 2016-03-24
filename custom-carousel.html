@@ -65,68 +65,69 @@
     </style>
 </template>
 <script>
-(function() {
-    var importDoc = document.currentScript.ownerDocument,
-        element = Object.create(HTMLElement.prototype),
-        template,
-        loop;
+    (function(window, document) {
+        var mainDoc = document,
+            importDoc = (mainDoc._currentScript || mainDoc.currentScript).ownerDocument,
+            element = Object.create(HTMLElement.prototype),
+            template,
+            loop;
 
-    var nxtSlide = function(images) {
-        for(i = 0; i < images.length; i++) {
-            if(images[i].classList.contains('active')) {
-                images[i].className = "";
-                if(i == (images.length - 1)) {
-                    images[0].className = "active";
-                    break;
-                } else {
-                    images[i+1].className = "active";
-                    break;
+        var nxtSlide = function(images) {
+            for(i = 0; i < images.length; i++) {
+                if(images[i].classList.contains('active')) {
+                    images[i].className = "";
+                    if(i == (images.length - 1)) {
+                        images[0].className = "active";
+                        break;
+                    } else {
+                        images[i+1].className = "active";
+                        break;
+                    }
                 }
             }
-        }
-    };
+        };
 
-    var prevSlide = function(images) {
-        for(i = 0; i < images.length; i++) {
-            if(images[i].classList.contains('active')) {
-                images[i].className = "";
-                if(i == 0) {
-                    images[images.length - 1].className = "active";
-                    break;
-                } else {
-                    images[i-1].className = "active";
-                    break;
+        var prevSlide = function(images) {
+            for(i = 0; i < images.length; i++) {
+                if(images[i].classList.contains('active')) {
+                    images[i].className = "";
+                    if(i == 0) {
+                        images[images.length - 1].className = "active";
+                        break;
+                    } else {
+                        images[i-1].className = "active";
+                        break;
+                    }
                 }
             }
-        }
-    };
+        };
 
-    // Fires when an instance of the element is created
-    element.createdCallback = function() {
-        var shadow = this.createShadowRoot();
-        template = importDoc.querySelector('#carousel-template');
-        shadow.appendChild(template.content.cloneNode(true));
-    };
+        // Fires when an instance of the element is created
+        element.createdCallback = function() {
+            var shadow = this.createShadowRoot();
+            template = importDoc.querySelector('#carousel-template');
+            shadow.appendChild(template.content.cloneNode(true));
+        };
 
-    // Fires when an instance was inserted into the document
-    element.attachedCallback = function() {
-        var images = this.shadowRoot.querySelectorAll('.content li'),
-            i;
-        setInterval( function() {
-            var clsname;
-            nxtSlide(images);
-        }, 2000);
-        this.shadowRoot.querySelector('.nxt').onclick = function() {
-            nxtSlide(images);
-        }
-        this.shadowRoot.querySelector('.prv').onclick = function() {
-            prevSlide(images);
-        }
-    };
+        // Fires when an instance was inserted into the document
+        element.attachedCallback = function() {
+            var images = this.shadowRoot.querySelectorAll('.content li'),
+                i;
+            setInterval( function() {
+                var clsname;
+                nxtSlide(images);
+            }, 2000);
+            this.shadowRoot.querySelector('.nxt').onclick = function() {
+                nxtSlide(images);
+            }
+            this.shadowRoot.querySelector('.prv').onclick = function() {
+                prevSlide(images);
+            }
+        };
 
-    // Registers custom element
-    document.registerElement('custom-carousel', {
-        prototype: element
-    });
-}());
+        // Registers custom element
+        document.registerElement('custom-carousel', {
+            prototype: element
+        });
+    }(window, document));
 </script>
