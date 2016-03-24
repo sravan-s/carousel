@@ -24,7 +24,12 @@
 3. Start using it!
 
     ```html
-    <custom-carousel></custom-carousel>
+    <custom-carousel>
+        <img src="img1">
+        <img src="img2">
+        ...
+        <img src="imgn">
+    </custom-carousel>
     ```
 
 ## Development
