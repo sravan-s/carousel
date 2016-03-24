@@ -1,11 +1,145 @@
+<template id="carousel-template">
+    <div class="container">
+        <ul class="content">
+        </ul>
+        <ul class="nav">
+            <li class="nxt">></li>
+            <li class="prv"><</li>
+        </ul>
+    </div>
+    <style>
+        ul {
+            padding-left: 0;
+        }
+        li {
+            display: inline-block;
+            list-style: none;
+        }
+        .container {
+            height: 100%;
+            position: relative;
+            width: 100%;
+        }
+        .content {
+            background-color: darksalmon;
+        }
+        .content li{
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .content li img {
+            height: 100%;
+            width: 100%;
+        }
+        .content, .content li {
+            height: 100%;
+            width: 100%;
+        }
+        .content li:not(.active) {
+            display: none;
+        }
+        .nxt, .prv {
+            background-color: skyblue;
+            cursor: pointer;
+            height: 50px;
+            line-height: 48px;
+            position: absolute;
+            top: calc(50% - 25px);
+            width: 50px;
+        }
+        .nxt {
+            right: -10px;
+            text-align: right;
+        }
+        .prv {
+            left: -10px;
+        }
+    </style>
+</template>
 <script>
-(function() {
-    // Creates an object based in the HTML Element prototype
-    var element = Object.create(HTMLElement.prototype);
+    (function(window, document) {
+        var mainDoc = document,
+            importDoc = (mainDoc._currentScript || mainDoc.currentScript).ownerDocument,
+            element = Object.create(HTMLElement.prototype),
+            template,
+            loop;
 
-    // Registers custom element
-    document.registerElement('custom-carousel', {
-        prototype: element
-    });
-}());
+        var nxtSlide = function(images) {
+            for(i = 0; i < images.length; i++) {
+                if(images[i].classList.contains('active')) {
+                    images[i].className = "";
+                    if(i == (images.length - 1)) {
+                        images[0].className = "active";
+                        break;
+                    } else {
+                        images[i+1].className = "active";
+                        break;
+                    }
+                }
+            }
+        };
+
+        var prevSlide = function(images) {
+            for(i = 0; i < images.length; i++) {
+                if(images[i].classList.contains('active')) {
+                    images[i].className = "";
+                    if(i == 0) {
+                        images[images.length - 1].className = "active";
+                        break;
+                    } else {
+                        images[i-1].className = "active";
+                        break;
+                    }
+                }
+            }
+        };
+
+        // Fires when an instance of the element is created
+        element.createdCallback = function() {
+            var shadow = this.createShadowRoot();
+            template = importDoc.querySelector('#carousel-template');
+            shadow.appendChild(template.content.cloneNode(true));
+        };
+
+        // Fires when an instance was inserted into the document
+        element.attachedCallback = function() {
+            var inputImages = this.querySelectorAll('img'),
+                imgHolder = this.shadowRoot.querySelectorAll('.content'),
+                i,
+                li;
+
+            if(inputImages.length > 0) {
+                for( i = 0; i < inputImages.length; i++) {
+                    li = document.createElement('li');
+                    imgHolder[0].appendChild(li);
+                    li.appendChild(inputImages[i]);
+                }
+            }
+
+            var images = this.shadowRoot.querySelectorAll('.content li');
+
+            images[0].setAttribute("class", "active");
+
+            setInterval( function() {
+                var clsname;
+                nxtSlide(images);
+            }, 2000);
+
+            this.shadowRoot.querySelector('.nxt').onclick = function() {
+                nxtSlide(images);
+            }
+
+            this.shadowRoot.querySelector('.prv').onclick = function() {
+                prevSlide(images);
+            }
+        };
+
+        // Registers custom element
+        document.registerElement('custom-carousel', {
+            prototype: element
+        });
+    }(window, document));
 </script>
