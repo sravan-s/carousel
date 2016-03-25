@@ -6,8 +6,8 @@
 ## Install
 
 The Bower way
-    ```
-        $ bower install webcomponent-carousel --save
+    ```sh
+        $ bower install webcomponent-custom-carousel --save
     ```
     OR
 
@@ -24,7 +24,7 @@ The Bower way
 2. Import custom element:
 
     ```html
-    <link rel="import" href="bower_components/webcomponent-carousel/custom-carousel.html">
+    <link rel="import" href="bower_components/webcomponent-custom-carousel/custom-carousel.html">
     ```
 
 3. Start using it!
