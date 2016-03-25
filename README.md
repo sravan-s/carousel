@@ -5,6 +5,12 @@
 
 ## Install
 
+The Bower way
+    ```sh
+        $ bower install webcomponent-carousel --save
+    ```
+Or
+
 [download as ZIP](https://github.com/sravan-s/carousel/archive/master.zip).
 
 ## Usage
@@ -18,7 +24,7 @@
 2. Import custom element:
 
     ```html
-    <link rel="import" href="bower_components/https://github.com/sravan-s/carousel/custom-carousel.html">
+    <link rel="import" href="bower_components/webcomponent-carousel/custom-carousel.html">
     ```
 
 3. Start using it!
