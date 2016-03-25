@@ -6,7 +6,7 @@
 ## Install
 
 The Bower way
-    ```sh
+    ```
         $ bower install webcomponent-custom-carousel --save
     ```
     OR
