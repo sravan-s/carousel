@@ -6,16 +6,16 @@
 ## Install
 
 The Bower way
-    ```sh
+    ```
         $ bower install webcomponent-carousel --save
     ```
-Or
+    OR
 
 [download as ZIP](https://github.com/sravan-s/carousel/archive/master.zip).
 
 ## Usage
 
-1. Import polyfill:
+1. Import polyfill(if necessary):
 
     ```html
     <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
